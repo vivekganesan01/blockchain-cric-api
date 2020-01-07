@@ -23,6 +23,10 @@
 			- get t20 stats for player
 			- get IPL stats for player
 
+#### version v1.0.0:  
+			- Integrated Dockerfile
+			- Containerized APP
+
 ##### API:
 	/get-all-player-name-and-id	GET
 	/get-all-player-id GET
@@ -35,3 +39,5 @@
 
 ##### Note:  Most of post API works with player unique id eg: {'id': 1234}, player unique id is the identifier that has been mapped to respective dataset in DB. So you should first get the ID for each player and those can be found via the below API call.
 	/get-all-player-name-and-id	GET
+
+##### NOTE: Docker private port/container port will be 8080
