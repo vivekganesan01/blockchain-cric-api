@@ -21,7 +21,7 @@
 		- get tests stats for player
 		- get ODI stats for player
 		- get t20 stats for player
-		- get IPL stats for play
+		- get IPL stats for player
 
 #### version v2.0.0:
 		- Integrated Dockerfile
