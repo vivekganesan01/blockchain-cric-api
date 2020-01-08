@@ -13,22 +13,27 @@
 		- bio 
 	
 #### version v1.0.0:  
-			- Integrated player API
-			- get all the the ID's
-			- get all the player name and ID
-			- get bio stats based on the ID
-			- get ID based on regex player name
-			- get tests stats for player
-			- get ODI stats for player
-			- get t20 stats for player
-			- get IPL stats for player
+		- Integrated player API
+		- get all the the ID's
+		- get all the player name and ID
+		- get bio stats based on the ID
+		- get ID based on regex player name
+		- get tests stats for player
+		- get ODI stats for player
+		- get t20 stats for player
+		- get IPL stats for player
 
-#### version v1.0.0:  
-			- Integrated Dockerfile
-			- Containerized APP
+#### version v2.0.0:
+		- Integrated Dockerfile
+		- Containerized APP
+
+#### version v2.0.1:
+		- Improvised Docker
+		- Cloud integration
+		- Enhanced API header parameters
 
 ##### API:
-	/get-all-player-name-and-id	GET
+	/get-all-player-name-and-id GET
 	/get-all-player-id GET
 	/get-player-bio POST body-param:{'id': 1234}
 	/get-player-id POST body-param:{'id': 1234}

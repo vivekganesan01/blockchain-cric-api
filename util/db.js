@@ -9,9 +9,9 @@ let _db_name;
  * @param {*} callback funtion.
  */
 const mongoConnect = (callback) => {
-  console.log("Started");
+  console.log("Started - Project setup");
   MongoClient.connect(URI, { useUnifiedTopology: true }).then(client => { 
-      console.log("Connection established !");
+      console.log("DB Connection established !");
       _db_name = client.db("gametheory");
       console.log("Connected db !");
       callback();

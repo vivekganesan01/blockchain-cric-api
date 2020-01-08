@@ -1,8 +1,6 @@
 /**
  * Module to handle all the player stats API
  * 
- * version v1.0.0
- *      - Integrated player API
  *      - get all the the ID's
  *      - get all the player name and ID
  *      - get bio stats based on the ID
@@ -26,7 +24,7 @@ const bio_collection = 'player_bio';
 const id_collection = 'player_id';
 
 /**
- *  Get the object size
+ *  To get the object size / length of the object
  */
 Object.size = function(obj) {
     var size = 0, key;
@@ -39,8 +37,8 @@ Object.size = function(obj) {
 /**
  * Function fetchs all the player id's.
  */
-player.get("/get-all-player-id", (req, res)=>{
 // todo: Need to update the player-id in the player id collections
+player.get("/get-all-player-id", (req, res)=>{
 });
 
 /**
@@ -74,6 +72,8 @@ player.get("/get-all-player-name-and-id", (req, res)=>{
 player.post("/get-player-bio", (req, res)=>{
     const body = req.body;
     const query = Object.keys(body)[0];
+    // set header
+    res.setHeader("Content-Type", "text/json");
     if (query !== 'id') {
         result = {
             '_id': null,
@@ -89,7 +89,6 @@ player.post("/get-player-bio", (req, res)=>{
             .find({'_id': values})
             .next()
             .then(result => {
-                res.setHeader("Content-Type", "text/json");
                 if (result === null) {
                     result = {
                         '_id': null,
@@ -107,19 +106,21 @@ player.post("/get-player-bio", (req, res)=>{
 });
 
 /**
- * Function helps to fetch all the player name and their id.
+ * Function helps to fetch the player id based on the name.
  * 
  * @param {string} var Need to pass player name
  */
 player.post("/get-player-id", (req, res)=>{
     const body = req.body;
     const query = Object.keys(body)[0];
-    if (query !== 'id') {
+    // set header
+    res.setHeader("Content-Type", "text/json");
+    if (query !== 'name') {
         result = {
             '_id': null,
-            'reason': 'post query is wrong, use id'
+            'reason': 'post query is wrong, use name'
         };
-        res.status(406).send('Invalid query param, Use: id')
+        res.status(406).send(result);
     }
     else {
         const values = Object.values(body)[0];
@@ -129,11 +130,10 @@ player.post("/get-player-id", (req, res)=>{
             .find({'_id': values})
             .next()
             .then(result => {
-                res.setHeader("Content-Type", "text/json");
                 if (result === null) {
                     result = {
                         '_id': null,
-                        'reason': 'id does not exists'
+                        'reason': 'name does not exists'
                     };
                     res.status(406).send(result);
                 }
@@ -152,12 +152,14 @@ player.post("/get-player-id", (req, res)=>{
 player.post("/get-player-tests-stats", (req, res)=>{
     const body = req.body;
     const query = Object.keys(body)[0];
+    // set header
+    res.setHeader("Content-Type", "text/json");
     if (query !== 'id') {
         result = {
             '_id': null,
             'reason': 'post query is wrong, use id'
         };
-        res.status(406).send('Invalid query param, Use: id')
+        res.status(406).send(result);
     }
     else {
         const values = Object.values(body)[0];
@@ -167,11 +169,10 @@ player.post("/get-player-tests-stats", (req, res)=>{
             .find({'_id': values})
             .next()
             .then(result => {
-                res.setHeader("Content-Type", "text/json");
                 if (result === null) {
                     result = {
                         '_id': null,
-                        'reason': 'id does not exists'
+                        'reason': 'player doesn\'t have test series history'
                     };
                     res.status(406).send(result);
                 }
@@ -190,12 +191,14 @@ player.post("/get-player-tests-stats", (req, res)=>{
 player.post("/get-player-odi-stats", (req, res)=>{
     const body = req.body;
     const query = Object.keys(body)[0];
+    // set header
+    res.setHeader("Content-Type", "text/json");
     if (query !== 'id') {
         result = {
             '_id': null,
             'reason': 'post query is wrong, use id'
         };
-        res.status(406).send('Invalid query param, Use: id')
+        res.status(406).send(result);
     }
     else {
         const values = Object.values(body)[0];
@@ -205,11 +208,10 @@ player.post("/get-player-odi-stats", (req, res)=>{
             .find({'_id': values})
             .next()
             .then(result => {
-                res.setHeader("Content-Type", "text/json");
                 if (result === null) {
                     result = {
                         '_id': null,
-                        'reason': 'id does not exists'
+                        'reason': 'id does not exists, player doesn\'t have odi history'
                     };
                     res.status(406).send(result);
                 }
@@ -228,12 +230,14 @@ player.post("/get-player-odi-stats", (req, res)=>{
 player.post("/get-player-t20-stats", (req, res)=>{
     const body = req.body;
     const query = Object.keys(body)[0];
+    // set header
+    res.setHeader("Content-Type", "text/json");
     if (query !== 'id') {
         result = {
             '_id': null,
             'reason': 'post query is wrong, use id'
         };
-        res.status(406).send('Invalid query param, Use: id')
+        res.status(406).send(result);
     }
     else {
         const values = Object.values(body)[0];
@@ -243,11 +247,10 @@ player.post("/get-player-t20-stats", (req, res)=>{
             .find({'_id': values})
             .next()
             .then(result => {
-                res.setHeader("Content-Type", "text/json");
                 if (result === null) {
                     result = {
                         '_id': null,
-                        'reason': 'id does not exists'
+                        'reason': 'id does not exists, player doesn\'t have t20 history'
                     };
                     res.status(406).send(result);
                 }
@@ -266,12 +269,14 @@ player.post("/get-player-t20-stats", (req, res)=>{
 player.post("/get-player-ipl-stats", (req, res)=>{
     const body = req.body;
     const query = Object.keys(body)[0];
+    // set header
+    res.setHeader("Content-Type", "text/json");
     if (query !== 'id') {
         result = {
             '_id': null,
             'reason': 'post query is wrong, use id'
         };
-        res.status(406).send('Invalid query param, Use: id')
+        res.status(406).send(result);
     }
     else {
         const values = Object.values(body)[0];
@@ -281,11 +286,10 @@ player.post("/get-player-ipl-stats", (req, res)=>{
             .find({'_id': values})
             .next()
             .then(result => {
-                res.setHeader("Content-Type", "text/json");
                 if (result === null) {
                     result = {
                         '_id': null,
-                        'reason': 'id does not exists'
+                        'reason': 'id does not exists, player doesn\'t have ipl history'
                     };
                     res.status(406).send(result);
                 }

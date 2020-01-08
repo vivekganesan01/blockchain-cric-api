@@ -11,9 +11,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(playerRoute);
 // default
 app.use("/", (req, res) => { 
-    res.status(200).send("<h2>welcome to cric API</h2>");
+    res.status(200).send("<h4> Welcome to cric API !!!! </h4>");
 });
 
 mongoConnect(()=> {
-    app.listen(8080);
+    app.listen(process.env.PORT || 8080);
 })
