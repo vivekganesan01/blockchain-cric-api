@@ -95,8 +95,9 @@ player.post("/get-player-bio", (req, res)=>{
                         'reason': 'id does not exists'
                     };
                     res.status(406).send(result);
+                } else {
+                    res.status(200).send(result);
                 }
-                res.status(200).send(result);
             })
             .catch(err => {
                 console.log(err);
@@ -136,8 +137,9 @@ player.post("/get-player-id", (req, res)=>{
                         'reason': 'name does not exists'
                     };
                     res.status(406).send(result);
+                } else {
+                    res.status(200).send(result);
                 }
-                res.status(200).send(result);
             })
             .catch(err => {
                 console.log(err);
@@ -175,8 +177,9 @@ player.post("/get-player-tests-stats", (req, res)=>{
                         'reason': 'player doesn\'t have test series history'
                     };
                     res.status(406).send(result);
+                } else {
+                    res.status(200).send(result);
                 }
-                res.status(200).send(result);
             })
             .catch(err => {
                 console.log(err);
@@ -214,8 +217,9 @@ player.post("/get-player-odi-stats", (req, res)=>{
                         'reason': 'id does not exists, player doesn\'t have odi history'
                     };
                     res.status(406).send(result);
+                } else {
+                    res.status(200).send(result);
                 }
-                res.status(200).send(result);
             })
             .catch(err => {
                 console.log(err);
@@ -253,8 +257,9 @@ player.post("/get-player-t20-stats", (req, res)=>{
                         'reason': 'id does not exists, player doesn\'t have t20 history'
                     };
                     res.status(406).send(result);
+                } else {
+                    res.status(200).send(result);
                 }
-                res.status(200).send(result);
             })
             .catch(err => {
                 console.log(err);
@@ -292,8 +297,9 @@ player.post("/get-player-ipl-stats", (req, res)=>{
                         'reason': 'id does not exists, player doesn\'t have ipl history'
                     };
                     res.status(406).send(result);
+                } else {
+                    res.status(200).send(result);
                 }
-                res.status(200).send(result);
             })
             .catch(err => {
                 console.log(err);
