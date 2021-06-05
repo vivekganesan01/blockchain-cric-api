@@ -35,6 +35,7 @@
 ##### API:
 	/get-all-player-name-and-id GET
 	/get-all-player-id GET
+	/first-player POST body-param: any combination of ('id', 'name', 'country', 'born') eg: {'id': 1234} {'name': 'dhoni'}
 	/get-player-bio POST body-param:{'id': 1234}
 	/get-player-id POST body-param:{'id': 1234}
 	/get-player-tests-stats POST body-param:{'id': 1234}

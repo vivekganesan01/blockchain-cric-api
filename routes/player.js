@@ -3,8 +3,8 @@
  * 
  *      - get all the the ID's
  *      - get all the player name and ID
- *      - get bio stats based on the ID
- *      - get ID based on regex player name
+ *      - get bio stats based on the id
+ *      - get player information based on id, name, born, country
  *      - get tests stats for player
  *      - get ODI stats for player
  *      - get t20 stats for player
@@ -107,45 +107,55 @@ player.post("/get-player-bio", (req, res)=>{
 });
 
 /**
- * Function helps to fetch the player id based on the name.
- * 
- * @param {string} var Need to pass player name
+ * Function fetch the player information based on the search query
+ * Allowed search filters [id (or/and) name (or/and) born (or/and) country]
  */
-player.post("/get-player-id", (req, res)=>{
-    const body = req.body;
-    const query = Object.keys(body)[0];
+player.post("/find-player", (req, res)=>{
+    const allowedParamQuery = ['_id', 'name', 'born', 'country'];  // allowed search filters
+    let wrongParam = false;
     // set header
     res.setHeader("Content-Type", "text/json");
-    if (query !== 'name') {
+    const body = req.body;
+    const objectKeys = Object.keys(body);
+    const objectValues = Object.values(body);
+    if (objectKeys.indexOf('id') !== -1) {
+        objectKeys[objectKeys.indexOf('id')] = '_id';
+    }
+    const searchQuery = {};
+    for (i = 0; i < objectKeys.length; i++) {
+        if (allowedParamQuery.includes(objectKeys[i])) {
+            searchQuery[objectKeys[i]] = {'$regex': objectValues[i]};
+        } else {
+            wrongParam = true;
+            break;
+        };
+    };
+    console.log(searchQuery);
+    if (wrongParam) {
         result = {
             '_id': null,
-            'reason': 'post query is wrong, use name'
+            'reason': 'invalid parameter filter, Use either [id (or/and) name (or/and) born (or/and) country]'
         };
-        res.status(406).send(result);
-    }
-    else {
-        const values = Object.values(body)[0];
+        res.status(406).send(result); 
+    } else {
         const database = db();
-        database
-            .collection(bio_collection)
-            .find({'_id': values})
-            .next()
-            .then(result => {
+        database.collection(bio_collection).find(searchQuery).toArray(function(err, result) {
+            if (err) {
+                res.status(404).send("Error occured.");
+                throw err;
+            } else {
                 if (result === null) {
                     result = {
                         '_id': null,
-                        'reason': 'name does not exists'
+                        'reason': 'record doesnot exists'
                     };
                     res.status(406).send(result);
                 } else {
                     res.status(200).send(result);
                 }
-            })
-            .catch(err => {
-                console.log(err);
-                throw err;
-            })
-    }
+            }
+        });
+    };
 });
 
 /**
