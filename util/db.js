@@ -16,6 +16,7 @@ const mongoConnect = (callback) => {
       console.log("Connected db !");
       callback();
     }).catch(err => {
+      console.log("DB network error");
       console.log(error);
       throw err;
     });
